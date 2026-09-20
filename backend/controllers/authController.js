@@ -21,9 +21,25 @@ exports.registerUser = async (req, res) => {
         if (existingUser) {
             return res.status(400).json({ message: "Email already in use" });
         }
-    }
 
-    // Create the user
+        // Create the user
+        const user = await User.create({
+            fullName,
+            email,
+            password,
+            profileImageUrl
+        });
+
+        res.status(201).json({
+            id: user._id,
+            user,
+            token: generateToken(user._id)
+        });
+    } catch (err) {
+        res
+            .status(500)
+            .json({message: "Error registering user", error: err.message});
+    }
 };
 
 // Login User
