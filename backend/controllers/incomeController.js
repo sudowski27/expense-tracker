@@ -27,7 +27,7 @@ exports.addIncome = async (req, res) => {
     }
 }
 
-// Add All Income source
+// Get All Income source
 exports.getAllIncome = async (req, res) => {
     const userId = req.user.id;
 
